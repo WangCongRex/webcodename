@@ -11,5 +11,10 @@
 </head>
 <body>
 <h1>THIS IS LEADER VIEW！</h1>
+
+<h2>${colorgrid }</h2>
+
+
+
 </body>
 </html>
