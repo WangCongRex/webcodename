@@ -11,59 +11,33 @@ public class LeaderService {
 	public String colorGridFactory(){
 
 		StringBuffer rst = new StringBuffer();
-
-		int redSize = 8;
-		int blueSize = 8;
-
 		Random rand = new Random(System.currentTimeMillis());
-
+		ArrayList<String> tmp = new ArrayList<String>();
+		
+		for(int i=0 ; i<8 ; i++){
+			tmp.add("R");
+			tmp.add("B");
+		}
+		
+		for(int i=0 ; i<7 ; i++){
+			tmp.add("Y");
+		}
+		tmp.add("K");
+		
 		int firstTeam = rand.nextInt(2);
 		if(firstTeam == 0){
 			rst.append("R:");
-			redSize ++;
+			tmp.add("R");
 		} else {
 			rst.append("B:");
-			blueSize ++;
+			tmp.add("B");
 		}
-
-		ArrayList<Integer> redPos = new ArrayList<Integer>();
-		ArrayList<Integer> bluePos = new ArrayList<Integer>();
-		int blackPos = rand.nextInt(25);
-
-		for(int i=0 ; i<redSize ; i++){
-			int pos = rand.nextInt(25);
-			while(pos == blackPos
-					|| redPos.contains(new Integer(pos))
-					){
-				pos = rand.nextInt(25);
-			}
-			
-			redPos.add(new Integer(pos));
-		}
-
-		for(int i=0 ; i<blueSize ; i++){
-			int pos = rand.nextInt(25);
-			while(pos == blackPos
-					|| redPos.contains(new Integer(pos))
-					|| bluePos.contains(new Integer(pos))
-					){
-				pos = rand.nextInt(25);
-			}
-			
-			bluePos.add(new Integer(pos));
-		}
-
+		
+		
 		for(int i=0 ; i<25 ; i++){
-			Integer currPos = new Integer(i);
-			if(i == blackPos){
-				rst.append("K").append("-");
-			} else if(redPos.contains(currPos)){
-				rst.append("R").append("-");
-			} else if(bluePos.contains(currPos)){
-				rst.append("B").append("-");
-			} else {
-				rst.append("Y").append("-");
-			}
+			int tarpos = rand.nextInt(tmp.size());
+			rst.append(tmp.get(tarpos)).append("-");
+			tmp.remove(tarpos);
 		}
 		
 		rst.deleteCharAt(rst.length()-1);
